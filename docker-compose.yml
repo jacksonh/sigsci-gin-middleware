@@ -1,0 +1,21 @@
+version: "3"
+services:
+  agent:
+    image: marc/sigsci-agent
+    environment:
+      SIGSCI_ACCESSKEYID: ${SIGSCI_ACCESSKEYID}
+      SIGSCI_SECRETACCESSKEY: ${SIGSCI_SECRETACCESSKEY}
+      SIGSCI_RPC_ADDRESS: 'unix:/var/run/sigsci/sigsci.sock'
+    volumes:
+      - shared-run:/var/run/sigsci
+  srv:
+    build: .
+    command: /app/main agent
+    ports:
+      - "8080:8080"
+    volumes:
+      - shared-run:/var/run/sigsci
+    depends_on:
+      - agent
+volumes:
+  shared-run:
