@@ -1,7 +1,9 @@
 version: "3"
 services:
   agent:
-    image: marc/sigsci-agent
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
     environment:
       SIGSCI_ACCESSKEYID: ${SIGSCI_ACCESSKEYID}
       SIGSCI_SECRETACCESSKEY: ${SIGSCI_SECRETACCESSKEY}
